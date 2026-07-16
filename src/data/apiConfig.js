@@ -30,8 +30,8 @@ const SPREADSHEET_ID = '1E7SBfDyWBZ6RXDo7rESduNuWayhB2NFKHGSoEN8qkSM';
 // │  Sesuaikan dengan nama tab yang ada di spreadsheet Anda.  │
 // │  Untuk dusun lain, cukup ganti nama sheet-nya saja.       │
 // └───────────────────────────────────────────────────────────┘
-const SHEET_UMKM = 'UMKM Giling';
-const SHEET_STATS = 'Statistik Giling';
+const SHEET_UMKM = 'UMKM Karang';
+const SHEET_STATS = 'Statistik Karang';
 
 /**
  * Membangun URL Google Sheets gviz/tq untuk mengambil data

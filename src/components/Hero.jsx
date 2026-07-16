@@ -1,5 +1,5 @@
 import { useSiteData } from '../context/SiteDataContext';
-import tuguGilingImg from '../images/TuguGiling.jpg';
+import tuguKarangImg from '../images/TuguKarang.jpeg';
 
 export default function Hero() {
   const { hero, padukuhan } = useSiteData();
@@ -11,17 +11,17 @@ export default function Hero() {
     >
       {/* Background image */}
       <img
-        src={tuguGilingImg}
+        src={tuguKarangImg}
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
       />
 
-      {/* Green gradient overlay — blends with the image */}
+      {/* Golden gradient overlay — blends with the image */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(150deg, rgba(7,30,17,0.92) 0%, rgba(14,50,32,0.85) 35%, rgba(24,77,48,0.78) 65%, rgba(14,50,32,0.88) 100%)',
+            'linear-gradient(150deg, rgba(69,26,3,0.92) 0%, rgba(120,53,15,0.85) 35%, rgba(180,83,9,0.75) 65%, rgba(120,53,15,0.88) 100%)',
         }}
       />
 
@@ -30,7 +30,7 @@ export default function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 80%, rgba(24,77,48,0.3) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 50% 80%, rgba(251,191,36,0.25) 0%, transparent 70%)',
         }}
       />
 

@@ -1,5 +1,5 @@
 /**
- * Data konten website Padukuhan Giling.
+ * Data konten website Padukuhan Karang.
  *
  * Struktur ini dirancang agar mudah di-replace dengan fetch() dari API eksternal.
  * Cukup ganti isi variabel atau ubah menjadi async fetch tanpa mengubah komponen.
@@ -12,7 +12,7 @@
 export const siteConfig = {
   /* ─── Info Padukuhan ─── */
   padukuhan: {
-    name: 'Giling',
+    name: 'Karang',
     desa: 'Tuksono',
     kecamatan: 'Sentolo',
     kabupaten: 'Kulon Progo',
@@ -21,9 +21,9 @@ export const siteConfig = {
 
   /* ─── Hero Section ─── */
   hero: {
-    title: 'Selamat Datang di Padukuhan Giling',
+    title: 'Selamat Datang di Padukuhan Karang',
     subtitle:
-      'Portal informasi resmi Padukuhan Giling, Desa Tuksono, Kecamatan Sentolo, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Temukan potensi desa, produk UMKM unggulan, dan informasi layanan masyarakat.',
+      'Portal informasi resmi Padukuhan Karang, Desa Tuksono, Kecamatan Sentolo, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta. Temukan potensi desa, produk UMKM unggulan, dan informasi layanan masyarakat.',
     ctaText: 'Jelajahi Potensi',
     backgroundImage: null, // Ganti dengan path: '/images/hero.jpg'
   },
@@ -130,29 +130,29 @@ export const siteConfig = {
   /* ─── Kontak ─── */
   contact: {
     address:
-      'Padukuhan Giling, Desa Tuksono, Kec. Sentolo, Kab. Kulon Progo, Daerah Istimewa Yogyakarta',
+      'Padukuhan Karang, Desa Tuksono, Kec. Sentolo, Kab. Kulon Progo, Daerah Istimewa Yogyakarta',
   },
 
   /* ─── Peta ─── */
   map: {
     wilayah: {
-      title: 'Peta Wilayah',
-      description: 'Peta lokasi dan batas wilayah Padukuhan Giling',
-      embedUrl: null, // Ganti dengan Google Maps embed URL
+      title: 'Peta Wilayah Padukuhan Karang',
+      description: 'Peta lokasi dan batas wilayah Padukuhan Karang',
+      embedUrl: 'https://maps.google.com/maps?q=Karang,+Tuksono,+Kulon+Progo&t=k&z=15&output=embed',
       image: null, // Atau: '/images/peta-wilayah.jpg'
     },
     administrasi: {
-      title: 'Peta Administrasi',
-      description: 'Peta administrasi wilayah',
-      image: null, // Ganti: '/images/peta-administrasi.jpg'
+      title: 'Peta Wilayah Kalurahan Tuksono',
+      description: 'Peta cakupan wilayah Kalurahan Tuksono secara umum',
+      embedUrl: 'https://maps.google.com/maps?q=Tuksono,+Kulon+Progo&t=k&z=13&output=embed',
     },
   },
 
   /* ─── Tentang Kami ─── */
   about: {
     title: 'Profil Padukuhan',
-    subtitle: 'Sejarah, Visi & Misi Padukuhan Giling',
-    sejarah: 'Padukuhan Giling merupakan salah satu wilayah yang masyarakatnya terus menjaga identitas budaya dan tradisi seperti Baritan Suran dan kesenian Oglek. Wilayah ini memiliki potensi pertanian dan UMKM yang berkembang, serta berkomitmen untuk melestarikan nilai-nilai lokal.',
+    subtitle: 'Sejarah, Visi & Misi Padukuhan Karang',
+    sejarah: 'Padukuhan Karang merupakan salah satu dari 12 dusun yang berada di wilayah Kalurahan Mandiri Budaya Tuksono, Kapanewon Sentolo, Kabupaten Kulon Progo. Secara umum, sejarah Kalurahan Tuksono terbentuk dari penggabungan dua kelurahan masa lampau, yakni Kelurahan Kalikutuk dan Kelurahan Kalisana.',
     visi: 'Mewujudkan Desa Tuksono menjadi Desa Mandiri melalui bidang Pertanian dan Industri Kecil, serta menjadi Desa Budaya yang lestari.',
     misi: [
       'Meningkatkan perekonomian masyarakat melalui pemberdayaan UMKM dan kerajinan lokal.',

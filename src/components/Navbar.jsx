@@ -4,7 +4,7 @@ const navLinks = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Tentang', href: '#tentang' },
   { label: 'Demografi', href: '#demografi' },
-  { label: 'UMKM', href: '#umkm' },
+  { label: 'Potensi & UMKM', href: '#umkm' },
   { label: 'Peta', href: '#peta' },
   { label: 'Alamat', href: '#alamat' },
 ];
@@ -21,22 +21,20 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-leaf-900/5'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-leaf-900/5'
+        : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
             href="#beranda"
-            className={`font-semibold tracking-tight transition-colors duration-300 ${
-              scrolled ? 'text-leaf-800' : 'text-white'
-            }`}
+            className={`font-semibold tracking-tight transition-colors duration-300 ${scrolled ? 'text-leaf-800' : 'text-white'
+              }`}
           >
-            Padukuhan Giling
+            Padukuhan Karang
           </a>
 
           {/* Desktop Navigation */}
@@ -45,11 +43,10 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  scrolled
-                    ? 'text-gray-600 hover:text-leaf-700 hover:bg-leaf-50'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
-                }`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${scrolled
+                  ? 'text-gray-600 hover:text-leaf-700 hover:bg-leaf-50'
+                  : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
               >
                 {link.label}
               </a>
@@ -60,11 +57,10 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              scrolled
-                ? 'text-leaf-800 hover:bg-leaf-50'
-                : 'text-white hover:bg-white/10'
-            }`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled
+              ? 'text-leaf-800 hover:bg-leaf-50'
+              : 'text-white hover:bg-white/10'
+              }`}
             aria-label={isOpen ? 'Tutup menu' : 'Buka menu'}
           >
             {isOpen ? (
@@ -102,9 +98,8 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`md:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
       >
         <div className="bg-white/95 backdrop-blur-xl border-t border-leaf-100 shadow-lg">
           {navLinks.map((link) => (

@@ -85,7 +85,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <p className="text-center text-sm text-leaf-200/40">
-            &copy; {year} Padukuhan {padukuhan.name}, Desa {padukuhan.desa} | KKN AB 064 UPNVYK 2026
+            &copy; {year} Padukuhan {padukuhan.name}, Desa {padukuhan.desa} | KKN AB 84.065 UPNVYK 2026
           </p>
         </div>
       </div>

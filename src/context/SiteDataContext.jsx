@@ -59,12 +59,17 @@ function parseGoogleSheetsResponse(text) {
           return;
         }
 
-        // Gunakan formatted value (f) jika ada, agar angka seperti
-        // nomor WhatsApp (6.285E12) tetap tampil benar ("6285158424337")
-        if (cell.f != null) {
+        // Untuk URL (http/https), selalu gunakan raw value (cell.v)
+        // karena cell.f bisa berisi teks tampilan yang terpotong.
+        // Untuk angka (misal WhatsApp 6.285E12), gunakan cell.f
+        // agar tampil benar ("6285158424337").
+        const rawVal = cell.v;
+        if (typeof rawVal === 'string' && /^https?:\/\//i.test(rawVal)) {
+          obj[cols[i]] = rawVal;
+        } else if (cell.f != null) {
           obj[cols[i]] = String(cell.f);
         } else {
-          obj[cols[i]] = cell.v;
+          obj[cols[i]] = rawVal;
         }
       });
       return obj;
@@ -78,7 +83,7 @@ function parseGoogleSheetsResponse(text) {
 /* ═══════════════════════════════════════════════════════════
    localStorage Cache — Mengurangi fetch & mempercepat load
    ═══════════════════════════════════════════════════════════ */
-const CACHE_PREFIX = 'padukuhan_data_';
+const CACHE_PREFIX = 'padukuhan_karang_data_v3_';
 const CACHE_DURATION = 5 * 60 * 1000; // 5 menit
 
 function getCached(key) {
@@ -112,35 +117,51 @@ function setCache(key, data) {
  * Mengubah URL Google Drive sharing menjadi URL gambar langsung.
  *
  * Input:  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
- * Output: https://lh3.googleusercontent.com/d/FILE_ID
+ * Output: https://drive.google.com/thumbnail?id=FILE_ID&sz=w800
  *
  * Jika bukan URL Google Drive, dikembalikan apa adanya.
  */
 function toDirectImageUrl(url) {
   if (!url || typeof url !== 'string') return null;
 
-  // Pattern: drive.google.com/file/d/{FILE_ID}/...
+  let fileId = null;
+
+  // Pattern 1: drive.google.com/file/d/{FILE_ID}/...
   const driveMatch = url.match(
     /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/
   );
-  if (driveMatch) {
-    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
+  if (driveMatch) fileId = driveMatch[1];
+
+  // Pattern 2: drive.google.com/open?id={FILE_ID}
+  if (!fileId) {
+    const openMatch = url.match(
+      /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/
+    );
+    if (openMatch) fileId = openMatch[1];
   }
 
-  // Pattern: drive.google.com/open?id={FILE_ID}
-  const openMatch = url.match(
-    /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/
-  );
-  if (openMatch) {
-    return `https://lh3.googleusercontent.com/d/${openMatch[1]}`;
+  // Pattern 3: drive.google.com/uc?id={FILE_ID}
+  if (!fileId) {
+    const ucMatch = url.match(
+      /drive\.google\.com\/uc\?.*id=([a-zA-Z0-9_-]+)/
+    );
+    if (ucMatch) fileId = ucMatch[1];
+  }
+
+  if (fileId) {
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
   }
 
   return url;
 }
 
-/* ── Mapper: row → format UMKM app ── */
+  /* ── Mapper: row → format UMKM app ── */
 function mapUmkmRow(row, index) {
   const rawImage = row['Foto'] || row['foto'] || null;
+
+  // Bersihkan input WhatsApp (hanya ambil angka). Jika kosong/strip, jadikan null.
+  let waNumber = String(row['WhatsApp'] || row['whatsapp'] || '').replace(/\D/g, '');
+  if (!waNumber) waNumber = null;
 
   return {
     id: index + 1,
@@ -148,7 +169,7 @@ function mapUmkmRow(row, index) {
     description: row['Deskripsi'] || row['deskripsi'] || '',
     image: toDirectImageUrl(rawImage),
     qris: String(row['QRIS'] || row['qris'] || '').toLowerCase() === 'ya',
-    whatsapp: String(row['WhatsApp'] || row['whatsapp'] || ''),
+    whatsapp: waNumber,
     category: row['Kategori'] || row['kategori'] || 'Lainnya',
     gmaps: row['Gmaps'] || row['gmaps'] || null,
   };

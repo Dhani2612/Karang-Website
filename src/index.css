@@ -1,18 +1,18 @@
 @import 'tailwindcss';
 
 @theme {
-  /* ── Leaf Green palette ── */
-  --color-leaf-50: #f0fdf4;
-  --color-leaf-100: #dcfce7;
-  --color-leaf-200: #bbf7d0;
-  --color-leaf-300: #86efac;
-  --color-leaf-400: #4ade80;
-  --color-leaf-500: #22c55e;
-  --color-leaf-600: #16a34a;
-  --color-leaf-700: #15803d;
-  --color-leaf-800: #166534;
-  --color-leaf-900: #14532d;
-  --color-leaf-950: #052e16;
+  /* ── Bright Yellow palette based on #f9f04b ── */
+  --color-leaf-50: #fefde8;
+  --color-leaf-100: #fdfac3;
+  --color-leaf-200: #fcf48c;
+  --color-leaf-300: #faea4d;
+  --color-leaf-400: #f9f04b;
+  --color-leaf-500: #eacc12;
+  --color-leaf-600: #c69c0c;
+  --color-leaf-700: #9e710d;
+  --color-leaf-800: #825911;
+  --color-leaf-900: #6e4914;
+  --color-leaf-950: #402607;
 
   /* ── Wood / Brown accent ── */
   --color-wood-50: #fdf8f0;
@@ -39,9 +39,11 @@
   html {
     scroll-behavior: smooth;
   }
+
   body {
     background-color: var(--color-warm-50);
   }
+
   ::selection {
     background-color: var(--color-leaf-200);
     color: var(--color-leaf-900);

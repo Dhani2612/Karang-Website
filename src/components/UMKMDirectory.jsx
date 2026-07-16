@@ -176,29 +176,58 @@ function DetailModal({ item, onClose }) {
 export default function UMKMDirectory() {
   const { umkm, loading } = useSiteData();
   const [selected, setSelected] = useState(null);
+  const [activeTab, setActiveTab] = useState('Semua');
+
+  const tabs = ['Semua', 'UMKM', 'Fasilitas Umum'];
+
+  const filtered = activeTab === 'Semua'
+    ? umkm
+    : umkm.filter((item) => item.category === activeTab);
 
   return (
     <>
       <section id="umkm" className="py-16 md:py-24 bg-warm-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-2xl md:text-[1.7rem] font-semibold text-leaf-900 mb-2">
-              Direktori UMKM
+              UMKM &amp; Aset Padukuhan
             </h2>
             <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
-              Produk UMKM unggulan dari Padukuhan Giling. Dukung ekonomi lokal
-              dengan membeli langsung dari warga kami.
+              Daftar produk UMKM unggulan, fasilitas umum, dan aset yang ada di Padukuhan Karang.
             </p>
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="flex items-center justify-center gap-2 mb-10">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${activeTab === tab
+                    ? 'bg-leaf-600 text-white shadow-md shadow-leaf-600/20'
+                    : 'bg-white text-gray-500 border border-warm-200 hover:border-leaf-300 hover:text-leaf-700'
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
 
           {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {loading
               ? Array.from({ length: 6 }).map((_, i) => (
-                  <UMKMSkeleton key={i} />
-                ))
-              : umkm.map((item) => (
+                <UMKMSkeleton key={i} />
+              ))
+              : filtered.length === 0
+                ? (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-gray-400 text-sm">Belum ada data untuk kategori ini.</p>
+                  </div>
+                )
+                : filtered.map((item) => (
                   <article
                     key={item.id}
                     className="group bg-white rounded-lg border border-warm-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col cursor-pointer"

@@ -66,14 +66,13 @@ export default function MapSection() {
             Lokasi &amp; Wilayah
           </p>
           <h2 className="text-2xl md:text-[1.7rem] font-semibold text-leaf-900">
-            Peta Padukuhan Giling
+            Peta Padukuhan Karang
           </h2>
         </div>
 
-        {/* Two-column map grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <MapCard data={map.wilayah} />
           <MapCard data={map.administrasi} />
+          <MapCard data={map.wilayah} />
         </div>
       </div>
     </section>

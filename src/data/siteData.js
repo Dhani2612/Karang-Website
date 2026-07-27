@@ -115,7 +115,7 @@ export const siteConfig = {
     wilayah: {
       title: 'Peta Wilayah Padukuhan Karang',
       description: 'Peta lokasi dan batas wilayah Padukuhan Karang',
-      embedUrl: 'https://maps.google.com/maps?q=Karang,+Tuksono,+Kec.+Sentolo,+Kabupaten+Kulon+Progo,+Daerah+Istimewa+Yogyakarta&t=k&z=15&output=embed',
+      embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15814.739485121408!2d110.2393356!3d-7.8649752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af9428cd1a76f%3A0x2b46ae57a1557e28!2sKarang%2C%20Tuksono%2C%20Kec.%20Sentolo%2C%20Kabupaten%20Kulon%20Progo%2C%20Daerah%20Istimewa%20Yogyakarta!5e1!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid',
       image: null, // Atau: '/images/peta-wilayah.jpg'
     },
     administrasi: {

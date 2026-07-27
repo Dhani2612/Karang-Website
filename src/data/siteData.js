@@ -28,30 +28,7 @@ export const siteConfig = {
     backgroundImage: null, // Ganti dengan path: '/images/hero.jpg'
   },
 
-  /* ─── Statistik Demografi ─── */
-  stats: [
-    {
-      id: 'kk',
-      label: 'Jumlah KK',
-      value: 245,
-      description: 'Kepala Keluarga terdaftar',
-      icon: 'home',
-    },
-    {
-      id: 'male',
-      label: 'Laki-laki',
-      value: 520,
-      description: 'Penduduk laki-laki',
-      icon: 'male',
-    },
-    {
-      id: 'female',
-      label: 'Perempuan',
-      value: 498,
-      description: 'Penduduk perempuan',
-      icon: 'female',
-    },
-  ],
+
 
   /* ─── Direktori UMKM ─── */
   umkm: [
@@ -138,7 +115,7 @@ export const siteConfig = {
     wilayah: {
       title: 'Peta Wilayah Padukuhan Karang',
       description: 'Peta lokasi dan batas wilayah Padukuhan Karang',
-      embedUrl: 'https://maps.google.com/maps?q=Karang,+Tuksono,+Kulon+Progo&t=k&z=15&output=embed',
+      embedUrl: 'https://maps.google.com/maps?q=Karang,+Tuksono,+Kec.+Sentolo,+Kabupaten+Kulon+Progo,+Daerah+Istimewa+Yogyakarta&t=k&z=15&output=embed',
       image: null, // Atau: '/images/peta-wilayah.jpg'
     },
     administrasi: {

@@ -83,7 +83,7 @@ function parseGoogleSheetsResponse(text) {
 /* ═══════════════════════════════════════════════════════════
    localStorage Cache — Mengurangi fetch & mempercepat load
    ═══════════════════════════════════════════════════════════ */
-const CACHE_PREFIX = 'padukuhan_karang_data_v3_';
+const CACHE_PREFIX = 'padukuhan_karang_data_v4_';
 const CACHE_DURATION = 5 * 60 * 1000; // 5 menit
 
 function getCached(key) {
@@ -175,16 +175,7 @@ function mapUmkmRow(row, index) {
   };
 }
 
-/* ── Mapper: row → format statistik app ── */
-function mapStatsRow(row) {
-  return {
-    id: String(row['ID'] || row['id'] || row['Label'] || '').toLowerCase(),
-    label: row['Label'] || row['label'] || '',
-    value: parseInt(row['Nilai'] || row['nilai'] || 0, 10),
-    description: row['Deskripsi'] || row['deskripsi'] || '',
-    icon: row['Icon'] || row['icon'] || 'home',
-  };
-}
+
 
 /**
  * Fetch data dari Google Sheets langsung.
@@ -218,13 +209,13 @@ async function fetchGoogleSheet(url, cacheKey) {
 export function SiteDataProvider({ children }) {
   const [data, setData] = useState(siteConfig);
   const [loading, setLoading] = useState(() =>
-    Boolean(API_CONFIG.umkm || API_CONFIG.stats)
+    Boolean(API_CONFIG.umkm)
   );
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // Tidak ada API URL? Langsung pakai data statis.
-    if (!API_CONFIG.umkm && !API_CONFIG.stats) {
+    if (!API_CONFIG.umkm) {
       setLoading(false);
       return;
     }
@@ -243,13 +234,7 @@ export function SiteDataProvider({ children }) {
           }
         }
 
-        // Fetch Statistik dari Google Sheets
-        if (API_CONFIG.stats) {
-          const rows = await fetchGoogleSheet(API_CONFIG.stats, 'stats');
-          if (Array.isArray(rows) && rows.length > 0) {
-            updates.stats = rows.map(mapStatsRow);
-          }
-        }
+
 
         if (!cancelled) {
           setData((prev) => ({ ...prev, ...updates }));

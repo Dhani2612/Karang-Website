@@ -178,7 +178,7 @@ export default function UMKMDirectory() {
   const [selected, setSelected] = useState(null);
   const [activeTab, setActiveTab] = useState('Semua');
 
-  const tabs = ['Semua', 'UMKM', 'Fasilitas Umum'];
+  const tabs = ['Semua', 'UMKM', 'Fasilitas Umum', 'Kebudayaan dan Kesenian'];
 
   const filtered = activeTab === 'Semua'
     ? umkm
@@ -191,10 +191,10 @@ export default function UMKMDirectory() {
           {/* Section header */}
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-[1.7rem] font-semibold text-leaf-900 mb-2">
-              UMKM &amp; Aset Padukuhan
+              Potensi Padukuhan
             </h2>
             <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
-              Daftar produk UMKM unggulan, fasilitas umum, dan aset yang ada di Padukuhan Karang.
+              Daftar produk UMKM unggulan, fasilitas umum, kebudayaan, kesenian, dan aset yang ada di Padukuhan Karang.
             </p>
           </div>
 

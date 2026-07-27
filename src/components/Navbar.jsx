@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 const navLinks = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Tentang', href: '#tentang' },
-  { label: 'Demografi', href: '#demografi' },
-  { label: 'Potensi & UMKM', href: '#umkm' },
+  { label: 'Potensi Padukuhan', href: '#umkm' },
   { label: 'Peta', href: '#peta' },
   { label: 'Alamat', href: '#alamat' },
 ];

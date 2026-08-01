@@ -128,7 +128,7 @@ export const siteConfig = {
   /* ─── Tentang Kami ─── */
   about: {
     title: 'Profil Padukuhan',
-    subtitle: 'Sejarah, Visi & Misi Padukuhan Karang',
+    subtitle: 'Sejarah Padukuhan Karang, Visi & Misi Kalurahan Tuksono',
     sejarah: 'Padukuhan Karang merupakan salah satu dari 12 dusun yang berada di wilayah Kalurahan Mandiri Budaya Tuksono, Kapanewon Sentolo, Kabupaten Kulon Progo. Secara umum, sejarah Kalurahan Tuksono terbentuk dari penggabungan dua kelurahan masa lampau, yakni Kelurahan Kalikutuk dan Kelurahan Kalisana.',
     visi: 'Bersama masyarakat kita wujudkan Desa Tuksono yang bersih, jujur, amanah demi tercapainya masyarakat yang religius, adil, makmur dan berkepribadian yang luhur.',
     misi: [

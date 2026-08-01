@@ -130,11 +130,15 @@ export const siteConfig = {
     title: 'Profil Padukuhan',
     subtitle: 'Sejarah, Visi & Misi Padukuhan Karang',
     sejarah: 'Padukuhan Karang merupakan salah satu dari 12 dusun yang berada di wilayah Kalurahan Mandiri Budaya Tuksono, Kapanewon Sentolo, Kabupaten Kulon Progo. Secara umum, sejarah Kalurahan Tuksono terbentuk dari penggabungan dua kelurahan masa lampau, yakni Kelurahan Kalikutuk dan Kelurahan Kalisana.',
-    visi: 'Mewujudkan Desa Tuksono menjadi Desa Mandiri melalui bidang Pertanian dan Industri Kecil, serta menjadi Desa Budaya yang lestari.',
+    visi: 'Bersama masyarakat kita wujudkan Desa Tuksono yang bersih, jujur, amanah demi tercapainya masyarakat yang religius, adil, makmur dan berkepribadian yang luhur.',
     misi: [
-      'Meningkatkan perekonomian masyarakat melalui pemberdayaan UMKM dan kerajinan lokal.',
-      'Memajukan sektor pertanian sebagai penopang utama ketahanan pangan.',
-      'Melestarikan nilai-nilai tradisi dan seni budaya lokal, seperti pelestarian adat Baritan dan kesenian Oglek.'
+      'Memperkokoh persatuan dan kerukunan antar warga Desa Tuksono tanpa memandang agama, status sosial, golongan dan mengusahakan peningkatan kesejahteraan kegiatan keagamaan.',
+      'Memberdayakan semua elemen masyarakat dalam proses pembangunan mulai perencanaan, pelaksanaan, dan pengawasan sebagai upaya mewujudkan pembangunan yang berkualitas, transparan dan dapat dipertanggungjawabkan.',
+      'Memaksimalkan kinerja perangkat desa sesuai tugas pokok dan fungsi demi tercapainya pelayanan kepada masyarakat yang prima.',
+      'Melestarikan adat tradisi, seni, dan budaya yang sudah ada di masyarakat untuk mewujudkan jati diri Tuksono sebagai Desa Budaya.',
+      'Membina, mengembangkan, dan selalu koordinasi untuk memfungsikan LPMD, PKK, Karang Taruna, FKPM, dan lembaga kemasyarakatan lainnya demi tercapainya suasana yang aman, tentram, damai, dan nyaman di kalangan masyarakat.',
+      'Membina dan memfungsikan generasi muda melalui karang taruna sebagai tulang punggung desa yang memiliki budi pekerti yang luhur dan mandiri dalam menyikapi Tuksono sebagai kawasan industri sehingga warga Tuksono bisa menjadi pelaku bukan hanya jadi penonton.',
+      'Mencermati ulang bantuan bagi masyarakat kurang mampu, kaum difabel dan lansia agar tidak salah sasaran.',
     ],
     image: null, // Ganti dengan gambar profil padukuhan
   },

@@ -5,11 +5,12 @@ const navLinks = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Tentang', href: '#tentang' },
   { label: 'Potensi Padukuhan', href: '#umkm' },
+  { label: 'Galeri', href: '#/galeri' },
   { label: 'Peta', href: '#peta' },
   { label: 'Alamat', href: '#alamat' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ forceSolid = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,9 +20,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const isSolid = scrolled || forceSolid;
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isSolid
         ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-leaf-900/5'
         : 'bg-transparent'
         }`}
@@ -31,7 +34,7 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#beranda"
-            className={`flex items-center gap-2.5 font-semibold tracking-tight transition-colors duration-300 ${scrolled ? 'text-leaf-950 font-bold' : 'text-white font-medium'
+            className={`flex items-center gap-2.5 font-semibold tracking-tight transition-colors duration-300 ${isSolid ? 'text-leaf-950 font-bold' : 'text-white font-medium'
               }`}
           >
             <img src={logoKkn} alt="Logo KKN" className="h-8 w-auto object-contain" />
@@ -44,7 +47,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${scrolled
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isSolid
                   ? 'text-gray-600 hover:text-leaf-700 hover:bg-leaf-50'
                   : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
@@ -58,7 +61,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled
+            className={`md:hidden p-2 rounded-lg transition-colors ${isSolid
               ? 'text-leaf-800 hover:bg-leaf-50'
               : 'text-white hover:bg-white/10'
               }`}

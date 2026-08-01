@@ -140,6 +140,7 @@ export const siteConfig = {
       'Membina dan memfungsikan generasi muda melalui karang taruna sebagai tulang punggung desa yang memiliki budi pekerti yang luhur dan mandiri dalam menyikapi Tuksono sebagai kawasan industri sehingga warga Tuksono bisa menjadi pelaku bukan hanya jadi penonton.',
       'Mencermati ulang bantuan bagi masyarakat kurang mampu, kaum difabel dan lansia agar tidak salah sasaran.',
     ],
-    image: null, // Ganti dengan gambar profil padukuhan
+    image: null,
   },
+  galeri: [], // Akan diisi data dari Google Sheets khusus galeri
 };

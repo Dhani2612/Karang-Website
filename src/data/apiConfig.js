@@ -24,29 +24,34 @@
 // │  Contoh: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms'  │
 // └───────────────────────────────────────────────────────────┘
 const SPREADSHEET_ID = '1E7SBfDyWBZ6RXDo7rESduNuWayhB2NFKHGSoEN8qkSM';
-
-// ┌───────────────────────────────────────────────────────────┐
-// │  NAMA SHEET (TAB) DI SPREADSHEET UNTUK DUSUN INI         │
-// │  Sesuaikan dengan nama tab yang ada di spreadsheet Anda.  │
-// │  Untuk dusun lain, cukup ganti nama sheet-nya saja.       │
-// └───────────────────────────────────────────────────────────┘
 const SHEET_POTENSI = 'Potensi Karang';
 
+// ┌───────────────────────────────────────────────────────────┐
+// │  SPREADSHEET ID KHUSUS GALERI KKN                         │
+// │  Silakan ganti dengan ID spreadsheet baru Anda.           │
+// └───────────────────────────────────────────────────────────┘
+const SPREADSHEET_ID_GALERI = '1rPxKLiaZVViReaC3uVVyWr0Y1cBakR0-jnFv_IaFnnk';
+const SHEET_GALERI = 'Galeri Karang';
+
 /**
- * Membangun URL Google Sheets gviz/tq untuk mengambil data
- * langsung dari Google tanpa perantara SheetDB.
+ * Membangun URL Google Sheets gviz/tq
  */
-function buildGoogleSheetsUrl(sheetName) {
-  return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&headers=0&sheet=${encodeURIComponent(sheetName)}`;
+function buildGoogleSheetsUrl(sheetId, sheetName) {
+  return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&headers=0&sheet=${encodeURIComponent(sheetName)}`;
 }
 
 // Cek apakah Spreadsheet ID sudah dikonfigurasi
 const isConfigured = SPREADSHEET_ID !== 'PASTE_SPREADSHEET_ID_DISINI';
+const isGaleriConfigured = SPREADSHEET_ID_GALERI !== 'PASTE_SPREADSHEET_ID_GALERI_DISINI';
 
 export const API_CONFIG = {
   /**
-   * URL untuk data Potensi (Tab: Potensi Karang).
-   * Otomatis null jika Spreadsheet ID belum di-set → pakai data statis.
+   * URL untuk data Potensi
    */
-  umkm: isConfigured ? buildGoogleSheetsUrl(SHEET_POTENSI) : null,
+  umkm: isConfigured ? buildGoogleSheetsUrl(SPREADSHEET_ID, SHEET_POTENSI) : null,
+  
+  /**
+   * URL untuk data Galeri
+   */
+  galeri: isGaleriConfigured ? buildGoogleSheetsUrl(SPREADSHEET_ID_GALERI, SHEET_GALERI) : null,
 };

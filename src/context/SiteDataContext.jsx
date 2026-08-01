@@ -210,7 +210,26 @@ function mapUmkmRow(row, index) {
   };
 }
 
+/* ── Mapper: row → format Galeri app ── */
+function mapGaleriRow(row, index) {
+  // Kolom Gdrive berisi link yang mungkin dipisahkan oleh newline atau koma
+  const rawLinks = row['Gdrive'] || row['gdrive'] || row['Foto'] || row['col_2'] || '';
+  
+  // Pecah link berdasarkan newline (\n) atau koma, lalu bersihkan spasi
+  const links = rawLinks
+    .split(/[\n,]+/)
+    .map(link => link.trim())
+    .filter(link => link.length > 0)
+    .map(toDirectImageUrl)
+    .filter(Boolean); // Hapus null jika gagal di-parse
 
+  return {
+    id: index + 1,
+    title: row['Judul'] || row['judul'] || 'Tanpa Judul',
+    description: row['Deskripsi Kegiatan'] || row['deskripsi'] || row['Deskripsi'] || '',
+    images: links // Array of images
+  };
+}
 
 /**
  * Fetch data dari Google Sheets langsung.
@@ -261,16 +280,33 @@ export function SiteDataProvider({ children }) {
       try {
         const updates = {};
 
-        // Fetch UMKM dari Google Sheets
+        // Fetch UMKM dan Galeri secara paralel
+        const fetchPromises = [];
+
         if (API_CONFIG.umkm) {
-          const rows = await fetchGoogleSheet(API_CONFIG.umkm, 'umkm');
-          if (Array.isArray(rows) && rows.length > 0) {
-            updates.umkm = rows.map(mapUmkmRow);
-          }
+          fetchPromises.push(
+            fetchGoogleSheet(API_CONFIG.umkm, 'umkm')
+              .then(rows => {
+                if (Array.isArray(rows) && rows.length > 0) {
+                  updates.umkm = rows.map(mapUmkmRow);
+                }
+              })
+          );
         }
 
+        if (API_CONFIG.galeri) {
+          fetchPromises.push(
+            fetchGoogleSheet(API_CONFIG.galeri, 'galeri')
+              .then(rows => {
+                if (Array.isArray(rows) && rows.length > 0) {
+                  updates.galeri = rows.map(mapGaleriRow);
+                }
+              })
+          );
+        }
 
-
+        // Tunggu semua fetch selesai
+        await Promise.all(fetchPromises);
         if (!cancelled) {
           setData((prev) => ({ ...prev, ...updates }));
         }

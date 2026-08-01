@@ -4,6 +4,7 @@ const footerNav = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Tentang', href: '#tentang' },
   { label: 'Potensi Padukuhan', href: '#umkm' },
+  { label: 'Galeri', href: '#/galeri' },
   { label: 'Peta', href: '#peta' },
 ];
 

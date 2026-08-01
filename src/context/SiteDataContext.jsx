@@ -212,8 +212,11 @@ function mapUmkmRow(row, index) {
 
 /* ── Mapper: row → format Galeri app ── */
 function mapGaleriRow(row, index) {
-  // Kolom Gdrive berisi link yang mungkin dipisahkan oleh newline atau koma
-  const rawLinks = row['Gdrive'] || row['gdrive'] || row['Foto'] || row['col_2'] || '';
+  // Cari kolom yang mengandung kata 'gdrive' atau 'foto'
+  const rowKeys = Object.keys(row);
+  const gdriveKey = rowKeys.find(k => k.toLowerCase().includes('gdrive') || k.toLowerCase().includes('foto')) || 'col_2';
+  
+  const rawLinks = row[gdriveKey] || '';
   
   // Pecah link berdasarkan newline (\n) atau koma, lalu bersihkan spasi
   const links = rawLinks

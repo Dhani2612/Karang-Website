@@ -33,8 +33,8 @@ function App() {
             <GallerySection />
             
             {/* Footer Khusus Galeri */}
-            <div className="mt-auto py-8 text-center border-t border-warm-100">
-              <p className="text-sm font-medium text-gray-400">
+            <div className="mt-auto py-8 text-center border-t border-neutral-800">
+              <p className="text-sm font-medium text-gray-500">
                 Galeri KKN UPN "Veteran" Yogyakarta 84.065
               </p>
             </div>

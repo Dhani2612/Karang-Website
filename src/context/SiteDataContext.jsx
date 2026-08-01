@@ -27,24 +27,44 @@ function parseGoogleSheetsResponse(text) {
   const json = JSON.parse(match[1]);
   const table = json.table;
 
-  // ── Tentukan nama kolom (header) ──
-  // Cek apakah Google Sheets mendeteksi header otomatis
-  const hasAutoHeaders = table.cols.some((col) => col.label && col.label.trim() !== '');
+  // ── Cari baris header secara manual ──
+  // Karena kita pakai headers=0, semua baris masuk sebagai data.
+  // Kita cari baris yang mengandung 'Nama' atau 'Deskripsi' sebagai header.
+  let headerRowIndex = -1;
+  const KNOWN_HEADERS = ['nama', 'deskripsi', 'kategori', 'foto'];
+
+  for (let r = 0; r < Math.min(table.rows.length, 5); r++) {
+    const rowVals = table.rows[r].c.map((cell) =>
+      cell ? String(cell.v || '').trim().toLowerCase() : ''
+    );
+    const matchCount = rowVals.filter((v) => KNOWN_HEADERS.includes(v)).length;
+    if (matchCount >= 2) {
+      headerRowIndex = r;
+      break;
+    }
+  }
 
   let cols;
   let dataRows;
 
-  if (hasAutoHeaders) {
-    // Google mendeteksi header → ambil dari cols.label
-    cols = table.cols.map((col) => col.label || '');
-    dataRows = table.rows;
-  } else {
-    // parsedNumHeaders=0 → baris pertama adalah header
-    // Ambil nama kolom dari row pertama
-    cols = table.rows[0].c.map((cell) =>
-      cell ? String(cell.v || '') : ''
+  if (headerRowIndex >= 0) {
+    // Gunakan baris header yang ditemukan
+    cols = table.rows[headerRowIndex].c.map((cell) =>
+      cell ? String(cell.v || '').trim() : ''
     );
-    dataRows = table.rows.slice(1); // Skip baris header
+    dataRows = table.rows.slice(headerRowIndex + 1);
+  } else {
+    // Fallback: cek apakah Google punya auto-headers
+    const hasAutoHeaders = table.cols.some((col) => col.label && col.label.trim() !== '');
+    if (hasAutoHeaders) {
+      cols = table.cols.map((col) => col.label || '');
+      dataRows = table.rows;
+    } else {
+      cols = table.rows[0].c.map((cell) =>
+        cell ? String(cell.v || '') : ''
+      );
+      dataRows = table.rows.slice(1);
+    }
   }
 
   // ── Konversi setiap baris menjadi object { NamaKolom: nilai } ──
@@ -52,10 +72,11 @@ function parseGoogleSheetsResponse(text) {
     .map((row) => {
       const obj = {};
       row.c.forEach((cell, i) => {
-        if (!cols[i]) return;
+        // Gunakan nama kolom, atau fallback ke 'col_N' untuk kolom tanpa nama
+        const colName = cols[i] || `col_${i}`;
 
         if (!cell || cell.v == null) {
-          obj[cols[i]] = '';
+          obj[colName] = '';
           return;
         }
 
@@ -65,11 +86,11 @@ function parseGoogleSheetsResponse(text) {
         // agar tampil benar ("6285158424337").
         const rawVal = cell.v;
         if (typeof rawVal === 'string' && /^https?:\/\//i.test(rawVal)) {
-          obj[cols[i]] = rawVal;
+          obj[colName] = rawVal;
         } else if (cell.f != null) {
-          obj[cols[i]] = String(cell.f);
+          obj[colName] = String(cell.f);
         } else {
-          obj[cols[i]] = rawVal;
+          obj[colName] = rawVal;
         }
       });
       return obj;
@@ -83,7 +104,7 @@ function parseGoogleSheetsResponse(text) {
 /* ═══════════════════════════════════════════════════════════
    localStorage Cache — Mengurangi fetch & mempercepat load
    ═══════════════════════════════════════════════════════════ */
-const CACHE_PREFIX = 'padukuhan_karang_data_v4_';
+const CACHE_PREFIX = 'padukuhan_karang_data_v5_';
 const CACHE_DURATION = 5 * 60 * 1000; // 5 menit
 
 function getCached(key) {
@@ -160,8 +181,22 @@ function mapUmkmRow(row, index) {
   const rawImage = row['Foto'] || row['foto'] || null;
 
   // Bersihkan input WhatsApp (hanya ambil angka). Jika kosong/strip, jadikan null.
-  let waNumber = String(row['WhatsApp'] || row['whatsapp'] || '').replace(/\D/g, '');
+  // Coba beberapa nama kolom yang mungkin (termasuk col_6 untuk kolom tanpa header)
+  const waRaw = row['WhatsApp'] || row['whatsapp'] || row['col_6'] || '';
+  let waNumber = String(waRaw).replace(/\D/g, '');
   if (!waNumber) waNumber = null;
+
+  // Kategori: gunakan kolom Kategori. Jika isinya sub-kategori (misal 'Sanggar'),
+  // cek kolom pertama (kolom A) yang mungkin berisi kategori utama.
+  let category = row['Kategori'] || row['kategori'] || 'Lainnya';
+  const colA = row['/'] || row['col_0'] || '';
+
+  // Jika kolom A berisi kategori utama yang valid, gunakan itu
+  const VALID_CATEGORIES = ['UMKM', 'Direktori UMKM', 'Fasilitas Umum', 'Kebudayaan dan Kesenian'];
+  if (VALID_CATEGORIES.some(c => colA.toLowerCase() === c.toLowerCase())) {
+    // Normalisasi: 'Direktori UMKM' → 'UMKM'
+    category = colA === 'Direktori UMKM' ? 'UMKM' : colA;
+  }
 
   return {
     id: index + 1,
@@ -170,7 +205,7 @@ function mapUmkmRow(row, index) {
     image: toDirectImageUrl(rawImage),
     qris: String(row['QRIS'] || row['qris'] || '').toLowerCase() === 'ya',
     whatsapp: waNumber,
-    category: row['Kategori'] || row['kategori'] || 'Lainnya',
+    category: category,
     gmaps: row['Gmaps'] || row['gmaps'] || null,
   };
 }

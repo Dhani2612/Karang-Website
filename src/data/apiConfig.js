@@ -37,7 +37,7 @@ const SHEET_POTENSI = 'Potensi Karang';
  * langsung dari Google tanpa perantara SheetDB.
  */
 function buildGoogleSheetsUrl(sheetName) {
-  return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&headers=0&sheet=${encodeURIComponent(sheetName)}`;
 }
 
 // Cek apakah Spreadsheet ID sudah dikonfigurasi

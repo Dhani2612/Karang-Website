@@ -140,9 +140,7 @@ function DetailModal({ item, onClose }) {
           <div className="flex items-center gap-2">
             {item.whatsapp && (
               <a
-                href={`https://wa.me/${item.whatsapp}?text=${encodeURIComponent(
-                  `Halo, saya tertarik dengan produk ${item.name}`
-                )}`}
+                href={`https://wa.me/${item.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 flex-1 justify-center px-5 py-3 bg-leaf-600 text-white text-sm font-medium rounded-lg hover:bg-leaf-700 transition-colors"

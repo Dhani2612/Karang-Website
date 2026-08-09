@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karang-website.vercel.app/sitemap.xml
